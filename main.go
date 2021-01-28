@@ -1,10 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"github.com/bwmarrin/discordgo"
+	"github.com/amazingcosima/girlfriend-discordbot/girlfriend"
+	"io/ioutil"
 )
 
 func main() {
-	fmt.Println("Hello, World!")
+	token, err := ioutil.ReadFile(".token")
+	if err != nil {
+	}
+	girlfriend.Login(string(token))
 }
