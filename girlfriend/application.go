@@ -16,6 +16,9 @@ func (app *App) CreateSession(token string) error{
 	if err != nil {
 		return err
 	}
+	session.StateEnabled = true
+	session.State.MaxMessageCount = 100
+	app.session.AddHandler(app.onMessageCreated)
 	err = session.Open()
 	return err
 }

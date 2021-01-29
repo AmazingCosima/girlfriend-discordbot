@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"bufio"
 	"github.com/amazingcosima/girlfriend-discordbot/girlfriend"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -15,8 +16,11 @@ func main() {
 	err = app.CreateSession(string(token))
 	var input string
 	for {
-		_, err = fmt.Scan(&input)
-		split := strings.Split(input, ",")
-		app.SendMessage(split[0], split[1])
+		scanner := bufio.NewScanner(os.Stdin)
+		for scanner.Scan() {
+			input = scanner.Text()
+			split := strings.Split(input, " ")
+			app.SendMessage(split[0], split[1])
+		}
 	}
 }
