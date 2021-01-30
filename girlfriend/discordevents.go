@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	commandTag = "gf"
+	commandTag = "<@!804384355740680232>"
 )
 
 func (app *App) onMessageCreated(session *discordgo.Session, event *discordgo.MessageCreate) {
