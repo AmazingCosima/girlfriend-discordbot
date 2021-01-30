@@ -3,6 +3,7 @@ package girlfriend
 func (app *App) SendMessage(channelID, content string) {
 	message, err := app.session.ChannelMessageSend(channelID, content)
 	if err != nil {
+		return
 	}
-	_ = message
+	app.logger.Log("Created message " + message.ID)
 }

@@ -15,8 +15,8 @@ func (app *App) onMessageCreated(session *discordgo.Session, event *discordgo.Me
 	if !strings.HasPrefix(content, commandTag) {
 		return
 	}
-	var arguments []string
 	content = strings.TrimPrefix(content, commandTag + " ")
+	var arguments []string
 	arguments = strings.Split(content, " ")
 	app.SendMessage(channelID, arguments[0])
 }
