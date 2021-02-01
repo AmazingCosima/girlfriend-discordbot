@@ -14,13 +14,15 @@ func (app *App) onMessageCreated(session *discordgo.Session, event *discordgo.Me
 	if !strings.HasPrefix(content, commandTag) {
 		return
 	}
-	app.lastCommandReceived = event
+	app.discordCommand = *event.Message
 	content = strings.TrimPrefix(content, commandTag + " ")
 	var arguments []string
 	arguments = strings.Split(content, " ")
 	command := arguments[0]
 	if len(arguments) > 1 {
 		arguments = arguments[1:]
+	} else {
+		arguments = nil
 	}
 	app.RunCommand(command, arguments)
 }

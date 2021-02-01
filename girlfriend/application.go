@@ -6,7 +6,7 @@ import (
 
 type App struct {
 	session *discordgo.Session
-	lastCommandReceived *discordgo.MessageCreate
+	discordCommand *discordgo.Message
 
 	logger *Logger
 }
