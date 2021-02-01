@@ -10,13 +10,17 @@ const (
 )
 
 func (app *App) onMessageCreated(session *discordgo.Session, event *discordgo.MessageCreate) {
-	channelID := event.ChannelID
 	content := event.Content
 	if !strings.HasPrefix(content, commandTag) {
 		return
 	}
+	app.lastCommandReceived = event
 	content = strings.TrimPrefix(content, commandTag + " ")
 	var arguments []string
 	arguments = strings.Split(content, " ")
-	app.SendMessage(channelID, arguments[0])
+	command := arguments[0]
+	if len(arguments) > 1 {
+		arguments = arguments[1:]
+	}
+	app.RunCommand(command, arguments)
 }

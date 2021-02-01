@@ -6,6 +6,8 @@ import (
 
 type App struct {
 	session *discordgo.Session
+	lastCommandReceived *discordgo.MessageCreate
+
 	logger *Logger
 }
 
@@ -26,4 +28,15 @@ func (app *App) CreateSession(token string) error{
 		app.logger.Log("Successfully created session")
 	}
 	return err
+}
+
+func (app *App) RunCommand(name string, args []string) {
+	app.logger.Log("Resolving command '" + name + "'")
+	var command Command
+	command = commands[name]
+	if command == nil {
+		app.logger.Log("Requested command does not exist")
+		return
+	}
+	command.RunFunc(app, args)
 }
