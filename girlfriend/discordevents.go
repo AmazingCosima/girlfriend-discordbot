@@ -14,7 +14,7 @@ func (app *App) onMessageCreated(session *discordgo.Session, event *discordgo.Me
 	if !strings.HasPrefix(content, commandTag) {
 		return
 	}
-	app.discordCommand = *event.Message
+	app.discordCommand = event.Message
 	content = strings.TrimPrefix(content, commandTag + " ")
 	var arguments []string
 	arguments = strings.Split(content, " ")
